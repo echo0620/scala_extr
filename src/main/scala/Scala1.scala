@@ -1,3 +1,5 @@
+import scala.collection.mutable.ArrayBuffer
+
 object Scala1 {
 
 
@@ -46,6 +48,18 @@ object Scala1 {
     println(i)
   }
 
+  for(i<- 1 until 10;y=i-1;z=y*i){
+     println("----------"+i+","+y+","+z)
+  }
+for{i<-1 until 10
+    y=i-1
+    z=i*y
+   }{
+  println("----------"+i+","+y+","+z)
+}
+
+
+
 //for引入变量
   for(i<- 1 to 5; j=6-i){
     println(j)
@@ -53,7 +67,7 @@ object Scala1 {
 
 
   //for返回结果接收
-  var for5=for(i<- 1 to 5) yield i
+  var for5=for(i<- 1 to 5) yield i*10
   println(for5)
 
 
@@ -94,8 +108,6 @@ shout4(1,2,3,4,5)
 
   def main(args: Array[String]): Unit = {
     println(args)
-
-
     try{
       println(divider(1,0))
     }catch{
@@ -103,7 +115,49 @@ shout4(1,2,3,4,5)
     }
   }
 
+val a2=Array(1,2,3,4,5)
+  //apply方法
+  println(a2(1))
+  println(a2.apply(4))
+  //updata 方法
+  a2(4)=10
+  println(a2.mkString(" "))
 
+  //遍历
+  for(x<-a2) println(x)
+
+
+
+  //map
+  val map=Map("Alic"->10,"Tom"->18)
+  for(x<-map) println(x)
+  for(x<-map) println(x._1)
+  for(x<-map) println(x._2)
+  for((x,y)<-map) println(x+y)
+
+  println(map.get("Alic"))
+
+
+//懒加载
+  def init():String={
+    println("init is excuted")
+    "init result"
+  }
+
+  lazy val msg=init()
+  println("init is over"+msg)
+
+
+//定长数组
+  val arr1=new Array[Int](2)
+  arr1(1)=10
+  println(arr1.mkString(","))
+  //边长数组
+  val arr2=new ArrayBuffer[Int]()
+  arr2.append(7)
+  //定长数组和变长数组转换
+  arr1.toBuffer
+  arr2.toArray
 
 
 }
